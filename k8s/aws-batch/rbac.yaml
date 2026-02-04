@@ -1,0 +1,40 @@
+---
+# Role com permissões mínimas necessárias dentro do namespace
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: aws-batch-job-role
+  namespace: aws-batch
+rules:
+  # Permissões para gerenciar pods (jobs do Batch)
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch", "create", "delete", "patch"]
+  - apiGroups: [""]
+    resources: ["serviceaccounts"]
+    verbs: ["get", "list"]
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["roles", "rolebindings"]
+    verbs: ["get", "list"]
+
+---
+# RoleBinding vinculando o Role ao usuário aws-batch (identidade usada pelo AWS Batch)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: aws-batch-job-rolebinding
+  namespace: aws-batch
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: aws-batch-job-role
+subjects:
+  - kind: Group
+    name: aws-batch-service
+    apiGroup: rbac.authorization.k8s.io
+  - kind: User
+    name: aws-batch
+    apiGroup: rbac.authorization.k8s.io
+  - kind: User
+    name: arn:aws:iam::767398116920:role/aws-service-role/batch.amazonaws.com/AWSServiceRoleForBatch
+    apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: aws-batch
+  labels:
+    name: aws-batch
+    purpose: batch-jobs
+    environment: dev
