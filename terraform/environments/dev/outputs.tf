@@ -28,6 +28,16 @@ output "kubeconfig_command" {
   value       = "aws eks update-kubeconfig --region ${var.region} --name ${module.eks.cluster_name}"
 }
 
+output "aws_load_balancer_controller_role_arn" {
+  description = "ARN do IAM Role (IRSA) do AWS Load Balancer Controller"
+  value       = module.aws_load_balancer_controller_irsa_role.arn
+}
+
+output "aws_load_balancer_controller_helm_status" {
+  description = "Status do Helm release do AWS Load Balancer Controller"
+  value       = helm_release.aws_load_balancer_controller.status
+}
+
 # ====================================================
 # AWS Batch Outputs
 # ====================================================
