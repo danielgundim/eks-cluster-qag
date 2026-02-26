@@ -94,10 +94,10 @@ output "batch_job_queue_name" {
 
 output "github_actions_access_entry_principal_arn" {
   description = "Principal ARN configurado no EKS Access Entry para GitHub Actions"
-  value       = aws_eks_access_entry.github_actions.principal_arn
+  value       = length(aws_eks_access_entry.github_actions) > 0 ? aws_eks_access_entry.github_actions[0].principal_arn : var.github_actions_role_arn
 }
 
 output "github_actions_access_policy_arn" {
   description = "Policy ARN associada ao principal do GitHub Actions no EKS"
-  value       = aws_eks_access_policy_association.github_actions_cluster_admin.policy_arn
+  value       = length(aws_eks_access_policy_association.github_actions_cluster_admin) > 0 ? aws_eks_access_policy_association.github_actions_cluster_admin[0].policy_arn : var.github_actions_eks_access_policy_arn
 }

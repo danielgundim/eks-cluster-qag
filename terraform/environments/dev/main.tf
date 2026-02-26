@@ -33,21 +33,26 @@ module "eks" {
   cluster_endpoint_public_access = var.cluster_endpoint_public_access
   public_access_cidrs            = var.public_access_cidrs
 
-  node_instance_types = var.node_instance_types
-  node_desired_size   = var.node_desired_size
-  node_min_size       = var.node_min_size
-  node_max_size       = var.node_max_size
+  node_instance_types     = var.node_instance_types
+  node_desired_size       = var.node_desired_size
+  node_min_size           = var.node_min_size
+  node_max_size           = var.node_max_size
+  eks_managed_node_groups = var.eks_managed_node_groups
 
   tags = local.common_tags
 }
 
 resource "aws_eks_access_entry" "github_actions" {
+  count = var.manage_github_actions_access_entry ? 1 : 0
+
   cluster_name  = module.eks.cluster_name
   principal_arn = var.github_actions_role_arn
   type          = "STANDARD"
 }
 
 resource "aws_eks_access_policy_association" "github_actions_cluster_admin" {
+  count = var.manage_github_actions_access_entry ? 1 : 0
+
   cluster_name  = module.eks.cluster_name
   principal_arn = var.github_actions_role_arn
   policy_arn    = var.github_actions_eks_access_policy_arn
@@ -135,6 +140,14 @@ resource "helm_release" "aws_load_balancer_controller" {
 # AWS Batch + EKS Integration
 # ====================================================
 
+resource "kubernetes_namespace_v1" "aws_batch" {
+  metadata {
+    name = "aws-batch"
+  }
+
+  depends_on = [module.eks]
+}
+
 module "batch_eks" {
   source = "../../modules/batch-eks"
 
@@ -148,6 +161,9 @@ module "batch_eks" {
   private_subnet_ids = module.vpc.private_subnets
   security_group_ids = [module.eks.node_security_group_id]
   max_vcpus          = 8
+  instance_profile_arn = var.batch_instance_profile_arn
 
   tags = local.common_tags
+
+  depends_on = [kubernetes_namespace_v1.aws_batch]
 }

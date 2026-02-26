@@ -1,0 +1,236 @@
+{
+    "jobDefinitions": [
+        {
+            "jobDefinitionName": "tii_qag-aws_batch_job_bqa",
+            "jobDefinitionArn": "arn:aws:batch:us-east-1:767398116920:job-definition/tii_qag-aws_batch_job_bqa:4",
+            "revision": 4,
+            "status": "ACTIVE",
+            "type": "container",
+            "parameters": {},
+            "retryStrategy": {
+                "attempts": 2,
+                "evaluateOnExit": []
+            },
+            "containerProperties": {
+                "image": "767398116920.dkr.ecr.us-east-1.amazonaws.com/tii-qag/bqa:sha-7cac485",
+                "command": [
+                    "sh",
+                    "-c",
+                    "echo 'Started BQA process'; python /app/examples/full_size_ibm_heavy_hex.py"
+                ],
+                "jobRoleArn": "arn:aws:iam::767398116920:role/BatchEcsTaskExecutionRole",
+                "executionRoleArn": "arn:aws:iam::767398116920:role/BatchEcsTaskExecutionRole",
+                "volumes": [],
+                "environment": [],
+                "mountPoints": [],
+                "ulimits": [],
+                "resourceRequirements": [
+                    {
+                        "value": "1.0",
+                        "type": "VCPU"
+                    },
+                    {
+                        "value": "2048",
+                        "type": "MEMORY"
+                    }
+                ],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {},
+                    "secretOptions": []
+                },
+                "secrets": [],
+                "networkConfiguration": {
+                    "assignPublicIp": "DISABLED"
+                },
+                "fargatePlatformConfiguration": {
+                    "platformVersion": "LATEST"
+                },
+                "enableExecuteCommand": true,
+                "runtimePlatform": {
+                    "operatingSystemFamily": "LINUX",
+                    "cpuArchitecture": "X86_64"
+                }
+            },
+            "tags": {},
+            "platformCapabilities": [
+                "FARGATE"
+            ],
+            "containerOrchestrationType": "ECS"
+        },
+        {
+            "jobDefinitionName": "tii_qag-aws_batch_job_bqa",
+            "jobDefinitionArn": "arn:aws:batch:us-east-1:767398116920:job-definition/tii_qag-aws_batch_job_bqa:3",
+            "revision": 3,
+            "status": "ACTIVE",
+            "type": "container",
+            "parameters": {},
+            "retryStrategy": {
+                "attempts": 2,
+                "evaluateOnExit": []
+            },
+            "containerProperties": {
+                "image": "767398116920.dkr.ecr.us-east-1.amazonaws.com/tii-qag/bqa:sha-625a948",
+                "command": [
+                    "sh",
+                    "-c",
+                    "echo 'Started BQA process'; python /app/examples/full_size_ibm_heavy_hex.py"
+                ],
+                "jobRoleArn": "arn:aws:iam::767398116920:role/BatchEcsTaskExecutionRole",
+                "executionRoleArn": "arn:aws:iam::767398116920:role/BatchEcsTaskExecutionRole",
+                "volumes": [],
+                "environment": [],
+                "mountPoints": [],
+                "ulimits": [],
+                "resourceRequirements": [
+                    {
+                        "value": "1.0",
+                        "type": "VCPU"
+                    },
+                    {
+                        "value": "2048",
+                        "type": "MEMORY"
+                    }
+                ],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {},
+                    "secretOptions": []
+                },
+                "secrets": [],
+                "networkConfiguration": {
+                    "assignPublicIp": "DISABLED"
+                },
+                "fargatePlatformConfiguration": {
+                    "platformVersion": "LATEST"
+                },
+                "enableExecuteCommand": true,
+                "runtimePlatform": {
+                    "operatingSystemFamily": "LINUX",
+                    "cpuArchitecture": "X86_64"
+                }
+            },
+            "tags": {},
+            "platformCapabilities": [
+                "FARGATE"
+            ],
+            "containerOrchestrationType": "ECS"
+        },
+        {
+            "jobDefinitionName": "tii_qag-aws_batch_job_bqa",
+            "jobDefinitionArn": "arn:aws:batch:us-east-1:767398116920:job-definition/tii_qag-aws_batch_job_bqa:2",
+            "revision": 2,
+            "status": "ACTIVE",
+            "type": "container",
+            "parameters": {},
+            "retryStrategy": {
+                "attempts": 2,
+                "evaluateOnExit": []
+            },
+            "containerProperties": {
+                "image": "767398116920.dkr.ecr.us-east-1.amazonaws.com/tii-qag/bqa:sha-625a948",
+                "command": [
+                    "sh",
+                    "-c",
+                    "echo 'Started BQA process'; python /app/examples/small_ibm_heavy_hex.py"
+                ],
+                "jobRoleArn": "arn:aws:iam::767398116920:role/BatchEcsTaskExecutionRole",
+                "executionRoleArn": "arn:aws:iam::767398116920:role/BatchEcsTaskExecutionRole",
+                "volumes": [],
+                "environment": [],
+                "mountPoints": [],
+                "ulimits": [],
+                "resourceRequirements": [
+                    {
+                        "value": "1.0",
+                        "type": "VCPU"
+                    },
+                    {
+                        "value": "2048",
+                        "type": "MEMORY"
+                    }
+                ],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {},
+                    "secretOptions": []
+                },
+                "secrets": [],
+                "networkConfiguration": {
+                    "assignPublicIp": "DISABLED"
+                },
+                "fargatePlatformConfiguration": {
+                    "platformVersion": "LATEST"
+                },
+                "enableExecuteCommand": true,
+                "runtimePlatform": {
+                    "operatingSystemFamily": "LINUX",
+                    "cpuArchitecture": "X86_64"
+                }
+            },
+            "tags": {},
+            "platformCapabilities": [
+                "FARGATE"
+            ],
+            "containerOrchestrationType": "ECS"
+        },
+        {
+            "jobDefinitionName": "tii_qag-aws_batch_job_bqa",
+            "jobDefinitionArn": "arn:aws:batch:us-east-1:767398116920:job-definition/tii_qag-aws_batch_job_bqa:1",
+            "revision": 1,
+            "status": "ACTIVE",
+            "type": "container",
+            "parameters": {},
+            "retryStrategy": {
+                "attempts": 2,
+                "evaluateOnExit": []
+            },
+            "containerProperties": {
+                "image": "767398116920.dkr.ecr.us-east-1.amazonaws.com/tii-qag/bqa:sha-625a948",
+                "command": [
+                    "sh",
+                    "-c",
+                    "echo 'hello world'; ls -la /app/examples"
+                ],
+                "jobRoleArn": "arn:aws:iam::767398116920:role/BatchEcsTaskExecutionRole",
+                "executionRoleArn": "arn:aws:iam::767398116920:role/BatchEcsTaskExecutionRole",
+                "volumes": [],
+                "environment": [],
+                "mountPoints": [],
+                "ulimits": [],
+                "resourceRequirements": [
+                    {
+                        "value": "1.0",
+                        "type": "VCPU"
+                    },
+                    {
+                        "value": "2048",
+                        "type": "MEMORY"
+                    }
+                ],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {},
+                    "secretOptions": []
+                },
+                "secrets": [],
+                "networkConfiguration": {
+                    "assignPublicIp": "DISABLED"
+                },
+                "fargatePlatformConfiguration": {
+                    "platformVersion": "LATEST"
+                },
+                "enableExecuteCommand": true,
+                "runtimePlatform": {
+                    "operatingSystemFamily": "LINUX",
+                    "cpuArchitecture": "X86_64"
+                }
+            },
+            "tags": {},
+            "platformCapabilities": [
+                "FARGATE"
+            ],
+            "containerOrchestrationType": "ECS"
+        }
+    ]
+}

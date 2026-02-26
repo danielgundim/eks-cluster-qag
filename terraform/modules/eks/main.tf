@@ -17,27 +17,7 @@ module "eks" {
 
   enable_irsa = true
 
-  eks_managed_node_groups = {
-    base = {
-      ami_type       = "AL2023_x86_64_STANDARD"
-      instance_types = var.node_instance_types
-      desired_size   = var.node_desired_size
-      min_size       = var.node_min_size
-      max_size       = var.node_max_size
-      disk_size      = var.node_disk_size
-      capacity_type  = var.node_capacity_type
-
-      # Força uso do user data padrão do EKS para AL2023
-      enable_bootstrap_user_data = false
-
-      labels = {
-        role        = "base"
-        environment = var.environment
-      }
-
-      tags = var.tags
-    }
-  }
+  eks_managed_node_groups = var.eks_managed_node_groups
 
   addons = {
     coredns = {

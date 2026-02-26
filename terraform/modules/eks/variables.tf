@@ -70,6 +70,12 @@ variable "node_capacity_type" {
   default     = "ON_DEMAND"
 }
 
+variable "eks_managed_node_groups" {
+  description = "Mapa de node groups gerenciados do EKS. Quando vazio, usa fallback do node group base."
+  type        = any
+  default     = {}
+}
+
 variable "tags" {
   description = "Tags para recursos."
   type        = map(string)

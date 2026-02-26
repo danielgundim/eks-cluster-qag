@@ -14,6 +14,8 @@ data "aws_iam_role" "batch_service_linked_role" {
 
 # Buscar instâncias do EKS para obter o Instance Profile ARN
 data "aws_instances" "eks_nodes" {
+  count = var.instance_profile_arn == null ? 1 : 0
+
   filter {
     name   = "tag:eks:cluster-name"
     values = [var.cluster_name]
@@ -27,21 +29,21 @@ data "aws_instances" "eks_nodes" {
 
 # Buscar detalhes da primeira instância para obter o Instance Profile
 data "aws_instance" "eks_node" {
-  count       = length(data.aws_instances.eks_nodes.ids) > 0 ? 1 : 0
-  instance_id = data.aws_instances.eks_nodes.ids[0]
+  count       = var.instance_profile_arn == null && length(data.aws_instances.eks_nodes[0].ids) > 0 ? 1 : 0
+  instance_id = data.aws_instances.eks_nodes[0].ids[0]
 }
 
 # Buscar o Instance Profile completo (para obter o ARN válido)
 data "aws_iam_instance_profile" "eks_node" {
-  count = length(data.aws_instance.eks_node) > 0 ? 1 : 0
+  count = var.instance_profile_arn == null && length(data.aws_instance.eks_node) > 0 ? 1 : 0
   name  = data.aws_instance.eks_node[0].iam_instance_profile
 }
 
 locals {
   oidc_provider_url = replace(data.aws_iam_openid_connect_provider.eks.url, "https://", "")
 
-  # Instance Profile ARN extraído da instância EC2 do node
-  instance_profile_arn = length(data.aws_iam_instance_profile.eks_node) > 0 ? data.aws_iam_instance_profile.eks_node[0].arn : null
+  # Instance Profile ARN informado explicitamente ou extraído da instância EC2 do node
+  instance_profile_arn = var.instance_profile_arn != null ? var.instance_profile_arn : (length(data.aws_iam_instance_profile.eks_node) > 0 ? data.aws_iam_instance_profile.eks_node[0].arn : null)
 }
 
 # ====================================================
@@ -211,3 +213,4 @@ resource "aws_batch_job_queue" "eks" {
     }
   )
 }
+

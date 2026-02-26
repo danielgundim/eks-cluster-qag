@@ -46,3 +46,15 @@ variable "max_vcpus" {
   type        = number
   default     = 8
 }
+
+variable "instance_profile_arn" {
+  description = "ARN do Instance Profile para o Compute Environment do AWS Batch. Quando informado, evita descoberta dinâmica via instâncias EC2."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.instance_profile_arn == null || can(regex("^arn:aws:iam::[0-9]{12}:instance-profile/.+", var.instance_profile_arn))
+    error_message = "instance_profile_arn deve ser nulo ou um ARN válido de instance-profile IAM."
+  }
+}
+

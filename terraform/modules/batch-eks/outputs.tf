@@ -42,3 +42,4 @@ output "job_queue_name" {
   description = "Nome da Job Queue do AWS Batch"
   value       = aws_batch_job_queue.eks.name
 }
+
