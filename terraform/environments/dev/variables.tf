@@ -57,3 +57,14 @@ variable "node_max_size" {
   description = "Máximo de nós."
   type        = number
 }
+
+variable "github_actions_role_arn" {
+  description = "ARN do IAM Role do GitHub Actions que terá acesso ao cluster EKS."
+  type        = string
+}
+
+variable "github_actions_eks_access_policy_arn" {
+  description = "ARN da policy de acesso EKS associada ao principal do GitHub Actions."
+  type        = string
+  default     = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+}

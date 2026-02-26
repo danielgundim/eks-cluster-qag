@@ -91,3 +91,13 @@ output "batch_job_queue_name" {
   description = "Nome da Job Queue do AWS Batch"
   value       = module.batch_eks.job_queue_name
 }
+
+output "github_actions_access_entry_principal_arn" {
+  description = "Principal ARN configurado no EKS Access Entry para GitHub Actions"
+  value       = aws_eks_access_entry.github_actions.principal_arn
+}
+
+output "github_actions_access_policy_arn" {
+  description = "Policy ARN associada ao principal do GitHub Actions no EKS"
+  value       = aws_eks_access_policy_association.github_actions_cluster_admin.policy_arn
+}

@@ -41,6 +41,24 @@ module "eks" {
   tags = local.common_tags
 }
 
+resource "aws_eks_access_entry" "github_actions" {
+  cluster_name  = module.eks.cluster_name
+  principal_arn = var.github_actions_role_arn
+  type          = "STANDARD"
+}
+
+resource "aws_eks_access_policy_association" "github_actions_cluster_admin" {
+  cluster_name  = module.eks.cluster_name
+  principal_arn = var.github_actions_role_arn
+  policy_arn    = var.github_actions_eks_access_policy_arn
+
+  access_scope {
+    type = "cluster"
+  }
+
+  depends_on = [aws_eks_access_entry.github_actions]
+}
+
 # ====================================================
 # AWS Load Balancer Controller (EKS)
 # ====================================================

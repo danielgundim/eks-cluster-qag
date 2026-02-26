@@ -12,3 +12,5 @@ node_instance_types = ["t3.medium"]
 node_desired_size   = 2
 node_min_size       = 1
 node_max_size       = 3
+
+github_actions_role_arn = "arn:aws:iam::767398116920:role/solver-api-prod-github-actions"
