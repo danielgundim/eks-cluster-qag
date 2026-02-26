@@ -24,6 +24,10 @@ eks_managed_node_groups = {
     disk_size      = 20
     capacity_type  = "ON_DEMAND"
 
+    iam_role_additional_policies = {
+      cloudwatch = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+    }
+
     enable_bootstrap_user_data = false
 
     labels = {
@@ -41,6 +45,10 @@ eks_managed_node_groups = {
     max_size       = 2
     disk_size      = 100
     capacity_type  = "ON_DEMAND"
+
+    iam_role_additional_policies = {
+      cloudwatch = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+    }
 
     enable_bootstrap_user_data = false
 

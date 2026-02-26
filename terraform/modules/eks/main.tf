@@ -20,6 +20,9 @@ module "eks" {
   eks_managed_node_groups = var.eks_managed_node_groups
 
   addons = {
+    amazon-cloudwatch-observability = {
+      most_recent = true
+    }
     coredns = {
       most_recent = true
     }
