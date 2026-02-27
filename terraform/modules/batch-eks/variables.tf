@@ -47,6 +47,12 @@ variable "max_vcpus" {
   default     = 8
 }
 
+variable "instance_types" {
+  description = "Lista de tipos de instância EC2 para o Compute Environment do AWS Batch"
+  type        = list(string)
+  default     = ["optimal"]
+}
+
 variable "instance_profile_arn" {
   description = "ARN do Instance Profile para o Compute Environment do AWS Batch. Quando informado, evita descoberta dinâmica via instâncias EC2."
   type        = string

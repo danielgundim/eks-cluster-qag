@@ -26,7 +26,7 @@ cat > "$PAYLOAD_FILE" <<JSON
           "command": [
             "sh",
             "-c",
-            "echo 'Started BQA process'; python /app/examples/full_size_ibm_heavy_hex.py"
+            "echo 'Started BQA process'; python3 /app/examples/full_size_ibm_heavy_hex.py"
           ],
           "resources": {
             "requests": {

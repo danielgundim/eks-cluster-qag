@@ -163,7 +163,7 @@ resource "aws_batch_compute_environment" "eks" {
     min_vcpus           = 0
     desired_vcpus       = 0
     max_vcpus           = var.max_vcpus
-    instance_type       = ["optimal"]
+    instance_type       = var.instance_types
     subnets             = var.private_subnet_ids
     security_group_ids  = var.security_group_ids
     instance_role       = local.instance_profile_arn

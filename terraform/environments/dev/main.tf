@@ -161,6 +161,7 @@ module "batch_eks" {
   private_subnet_ids = module.vpc.private_subnets
   security_group_ids = [module.eks.node_security_group_id]
   max_vcpus          = 8
+  instance_types     = ["g5.xlarge"]
   instance_profile_arn = var.batch_instance_profile_arn
 
   tags = local.common_tags
