@@ -3,9 +3,13 @@ set -euo pipefail
 
 AWS_PROFILE="${AWS_PROFILE:-tii}"
 AWS_REGION="${AWS_REGION:-us-east-1}"
-JOB_DEFINITION_NAME="${JOB_DEFINITION_NAME:-tii_qag-aws_batch_job_bqa_eks}"
-IMAGE="${IMAGE:-767398116920.dkr.ecr.us-east-1.amazonaws.com/tii-qag/bqa:sha-7cac485}"
+JOB_DEFINITION_NAME="${JOB_DEFINITION_NAME:-tii_qag_aws_batch_job_bqa_eks_gpu_feature_pipeline}"
+IMAGE="${IMAGE:-767398116920.dkr.ecr.us-east-1.amazonaws.com/tii-qag/bqa:feature-pipeline-gpu-gpu-b42e220}"
 SERVICE_ACCOUNT="${SERVICE_ACCOUNT:-aws-batch-sa}"
+EXAMPLE_SCRIPT="${EXAMPLE_SCRIPT:-small_ibm_heavy_hex.py}"
+CPU="${CPU:-1}"
+MEMORY="${MEMORY:-2048Mi}"
+GPU="${GPU:-1}"
 
 PAYLOAD_FILE="$(mktemp /tmp/batch-eks-jobdef-XXXXXX.json)"
 
@@ -26,16 +30,18 @@ cat > "$PAYLOAD_FILE" <<JSON
           "command": [
             "sh",
             "-c",
-            "echo 'Started BQA process'; python3 /app/examples/full_size_ibm_heavy_hex.py"
+            "echo 'Started BQA process'; python3 /app/examples/$EXAMPLE_SCRIPT"
           ],
           "resources": {
             "requests": {
-              "cpu": "1",
-              "memory": "2048Mi"
+              "cpu": "$CPU",
+              "memory": "$MEMORY",
+              "nvidia.com/gpu": "$GPU"
             },
             "limits": {
-              "cpu": "1",
-              "memory": "2048Mi"
+              "cpu": "$CPU",
+              "memory": "$MEMORY",
+              "nvidia.com/gpu": "$GPU"
             }
           }
         }
